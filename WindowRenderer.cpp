@@ -3,6 +3,9 @@
 
 #include "include/WindowRenderer.hpp"
 #include "include/Tile.hpp"
+#include "include/utility.hpp"
+#include "include/Player.hpp"
+
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -29,7 +32,7 @@ WindowRenderer::~WindowRenderer()
 {
     SDL_DestroyWindow(this->window);
     SDL_DestroyRenderer(this->renderer);
-    SDL_Quit();
+ 
 }
 
 SDL_Texture * WindowRenderer::load_texture(const char * path)
@@ -45,13 +48,36 @@ SDL_Texture * WindowRenderer::load_texture(const char * path)
     return texture;
 }
 
-
-void WindowRenderer::render(Tile & tile)
+void WindowRenderer::render_tile(Tile * tile, SDL_Rect &camera, SDL_Texture * texture)
 {
-    SDL_RenderCopy(this->renderer, tile.get_texture(), &(tile.get_size()), &(tile.get_destination()));
+    if(check_collision(tile->get_destination(),camera))
+    {
+        int x = tile->get_destination().x- camera.x;
+        int y = tile->get_destination().y - camera.y;
+
+        SDL_Rect renderQuad = { x, y, tile->get_destination().w, tile->get_destination().h};
+        SDL_RenderCopy(this->renderer, texture, (tile->get_clip()), &(renderQuad));
+    }
 }
+
+void WindowRenderer::render_player(Player &player,  SDL_Rect &camera)
+{
+    int x= player.get_hit_box()->x - camera.x;
+    int y = player.get_hit_box()->y - camera.y;
+    SDL_Rect renderQuad = { x, y, player.get_hit_box()->w, player.get_hit_box()->h};
+
+    SDL_RenderCopy(this->renderer,player.get_texture(), NULL, &renderQuad);
+
+}
+
 void WindowRenderer::display()
 {
     SDL_RenderPresent(this->renderer);
+}
+
+void WindowRenderer::clear()
+{
+    SDL_SetRenderDrawColor( this->renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    SDL_RenderClear(this->renderer);
 }
 #endif
