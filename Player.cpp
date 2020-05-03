@@ -90,8 +90,15 @@ SDL_Texture *  Player::get_texture()
 {
     return this->player_texture;
 }
+
 SDL_Rect * Player::get_hit_box()
 {
     return &(this->hit_box);
+}
+
+void Player::set_pos(int x, int y)
+{
+    this->hit_box.x = x;
+    this->hit_box.y = y;
 }
 #endif

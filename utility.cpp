@@ -12,7 +12,7 @@
 #include "include/utility.hpp"
 
 
-bool load_tiles(Tile * tiles[])
+bool load_tiles(Tile * tiles[], char *map_name)
 {
     bool success = true;
     int x = 0;
@@ -20,7 +20,7 @@ bool load_tiles(Tile * tiles[])
 
     TILE_TYPE tile_type;
 
-    std::ifstream map("assets/test.map");
+    std::ifstream map(map_name);
     if(map.fail()) 
     {
         std::cout << "Failed to load map\n";
