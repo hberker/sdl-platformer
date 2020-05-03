@@ -60,6 +60,23 @@ void Player::move_player(Tile * tiles[])
         this->hit_box.y -= this->player_vel_y;
     }
 }
+
+bool Player::at_gate(Tile * tiles[])
+{
+    for( int i = 0; i < TOTAL_TILES; ++i )
+    {
+        //If the tile is a wall type tile
+        if( ( tiles[ i ]->tile_type == RED_GATE_TILE ) )
+        {
+            //If the collision box touches the wall tile
+            if( check_collision( this->hit_box, tiles[ i ]->get_destination() ) )
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 void Player::set_camera(SDL_Rect &camera)
 {
     //Center the camera over the dot
