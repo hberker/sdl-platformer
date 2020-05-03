@@ -5,7 +5,7 @@
 
 constexpr char *GAME_NAME = "GAME";
 constexpr char *TILE_TEXTURE_PATH = "assets/tiles.png"; 
-constexpr char *PLAYER_TEXTURE_PATH = "assets/ball.png";
+constexpr char *PLAYER_TEXTURE_PATH = "assets/person_back.png";
 
 constexpr int TILE_SIZE = 80;
 constexpr int TOTAL_TILES = 192;
