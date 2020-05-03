@@ -17,6 +17,7 @@ class Player
         void handle_events(SDL_Event &);
         void set_camera(SDL_Rect &);
         void move_player(Tile * t[]);
+        void set_pos(int , int );
         SDL_Texture * get_texture();
         SDL_Rect * get_hit_box();
         const int PLAYER_WIDTH = 20;
