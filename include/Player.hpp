@@ -23,8 +23,8 @@ class Player
         SDL_Texture * get_texture();
         SDL_Rect * get_hit_box();
 
-        const int PLAYER_WIDTH = 20;
-        const int PLAYER_HEIGHT= 20;
+        const int PLAYER_WIDTH = 40;
+        const int PLAYER_HEIGHT= 70;
         const int PLAYER_MAX_VEL = 10;
 
     private:
