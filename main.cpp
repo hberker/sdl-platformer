@@ -23,7 +23,8 @@ int main(int argc, char **argv)
     SDL_Texture * dot_texture = window.load_texture("assets/white_ball.png");
 
     Player player(dot_texture);
-    load_tiles(tiles);
+    load_tiles(tiles, "assets/level1.map");
+    player.set_pos(LEVEL_WIDTH / 2 , LEVEL_HEIGHT - player.PLAYER_HEIGHT);
 
     while(game_running)
     {
