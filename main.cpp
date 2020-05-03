@@ -30,7 +30,9 @@ int main(int argc, char **argv)
         new Level("assets/test.map",0,0)
     };
 
+    //loads tiles with first level
     load_tiles(tiles, levels[0]->get_map_name());
+    //Puts player at level start postion
     player.set_pos(levels[CURRENT_LEVEL]->get_start_x(), levels[CURRENT_LEVEL]->get_start_y());
 
     while(game_running)
@@ -43,6 +45,7 @@ int main(int argc, char **argv)
             player.handle_events(event);
         }
         
+        //renderes tiles 
         for(int i = 0;  i < TOTAL_TILES; i++) window.render_tile(tiles[i], cam, tile_textures);
 
         player.move_player(tiles);
@@ -51,6 +54,7 @@ int main(int argc, char **argv)
         window.render_player(player,cam);
         window.display();
 
+        //Checks to see if player can progress to next level
         if(player.at_gate(tiles) && ++CURRENT_LEVEL < TOTAL_LEVELS)
         {
             load_tiles(tiles, levels[CURRENT_LEVEL]->get_map_name());

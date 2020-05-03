@@ -10,9 +10,8 @@
 
 class Player
 {
-
     public:
-        Player(SDL_Texture * text);
+        Player(SDL_Texture * );
         ~Player();
 
         void handle_events(SDL_Event &);
@@ -25,7 +24,7 @@ class Player
 
         const int PLAYER_WIDTH = 40;
         const int PLAYER_HEIGHT= 70;
-        const int PLAYER_MAX_VEL = 10;
+        const int PLAYER_MAX_VEL = 7;
 
     private:
         SDL_Rect hit_box = {0,0,PLAYER_WIDTH, PLAYER_HEIGHT};
