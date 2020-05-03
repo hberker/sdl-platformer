@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "hash_map": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp"
+    }
+}
