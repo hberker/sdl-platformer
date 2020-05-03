@@ -24,10 +24,10 @@ void Player::handle_events(SDL_Event & e)
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
-            case SDLK_DOWN: this->player_vel_y += this->PLAYER_MAX_VEL; break;
-            case SDLK_LEFT: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
-            case SDLK_RIGHT: this->player_vel_x += this->PLAYER_MAX_VEL; break;
+            case SDLK_w: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
+            case SDLK_s: this->player_vel_y += this->PLAYER_MAX_VEL; break;
+            case SDLK_a: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
+            case SDLK_d: this->player_vel_x += this->PLAYER_MAX_VEL; break;
         }
     }
     //If a key was released
@@ -36,10 +36,10 @@ void Player::handle_events(SDL_Event & e)
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: this->player_vel_y += this->PLAYER_MAX_VEL; break;
-            case SDLK_DOWN: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
-            case SDLK_LEFT: this->player_vel_x += this->PLAYER_MAX_VEL; break;
-            case SDLK_RIGHT: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
+            case SDLK_w: this->player_vel_y += this->PLAYER_MAX_VEL; break;
+            case SDLK_s: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
+            case SDLK_a: this->player_vel_x += this->PLAYER_MAX_VEL; break;
+            case SDLK_d: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
         }
     }
 
@@ -48,14 +48,18 @@ void Player::handle_events(SDL_Event & e)
 
 void Player::move_player(Tile * tiles[])
 {
+    SDL_Rect adjusted_hitbox;
+
     this->hit_box.x += this->player_vel_x;
-    if((this->hit_box.x  < 0) || (this->hit_box.x + PLAYER_WIDTH > LEVEL_WIDTH) || touches_wall(this->hit_box,tiles))
+    adjusted_hitbox = hit_box;    
+    if((adjusted_hitbox.x  < 0) || (adjusted_hitbox.x + adjusted_hitbox.w > LEVEL_WIDTH) || touches_wall(adjusted_hitbox,tiles))
     {
         this->hit_box.x -= this->player_vel_x;
     }
 
     this->hit_box.y += this->player_vel_y;
-    if((this->hit_box.y  < 0) || (this->hit_box.y + PLAYER_HEIGHT > LEVEL_HEIGHT) || touches_wall(this->hit_box,tiles))
+    adjusted_hitbox= hit_box;
+    if((adjusted_hitbox.y  < 0) || (adjusted_hitbox.y + adjusted_hitbox.h > LEVEL_HEIGHT) || touches_wall(adjusted_hitbox,tiles))
     {
         this->hit_box.y -= this->player_vel_y;
     }
@@ -77,6 +81,7 @@ bool Player::at_gate(Tile * tiles[])
     }
     return false;
 }
+
 void Player::set_camera(SDL_Rect &camera)
 {
     //Center the camera over the dot
