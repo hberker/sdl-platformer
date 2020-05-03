@@ -5,7 +5,8 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL.h>
 
-#include "Tile.hpp"
+//#include "Tile.hpp"
+#include "constant.hpp"
 
 class Player
 {
@@ -16,9 +17,9 @@ class Player
 
         void handle_events(SDL_Event &);
         void set_camera(SDL_Rect &);
-        void move_player(Tile ** t);
+        void move_player(class Tile ** t);
         void set_pos(int , int );
-        bool at_gate(Tile ** t);
+        bool at_gate(class Tile ** t);
         SDL_Texture * get_texture();
         SDL_Rect * get_hit_box();
 
@@ -32,7 +33,5 @@ class Player
         int player_vel_x = 0;
         int player_vel_y = 0;
 };
-
-
 
 #endif

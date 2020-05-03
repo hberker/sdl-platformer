@@ -5,7 +5,7 @@
 
 constexpr char *GAME_NAME = "GAME";
 constexpr char *TILE_TEXTURE_PATH = "assets/tiles.png"; 
-constexpr char *PLAYER_TEXTURE_PATH = "assets/white_ball.png";
+constexpr char *PLAYER_TEXTURE_PATH = "assets/ball.png";
 
 constexpr int TILE_SIZE = 80;
 constexpr int TOTAL_TILES = 192;
@@ -17,9 +17,6 @@ constexpr int LEVEL_WIDTH = 1280;
 constexpr int LEVEL_HEIGHT = 960;
 
 constexpr int TOTAL_LEVELS = 2;
-
-
-
 
 constexpr SDL_Rect CLIP_LOCATIONS[TOTAL_TILE_SPRITES]
 {   
