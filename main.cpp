@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     SDL_Rect cam = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
     Tile *tiles[TOTAL_TILES];
     Player player(player_texture);
-
+    int start_frame = 0;
     int CURRENT_LEVEL = 0;
     bool game_running = true;
 
@@ -34,7 +34,6 @@ int main(int argc, char **argv)
     load_tiles(tiles, levels[0]->get_map_name());
     //Puts player at level start postion
     player.set_pos(levels[CURRENT_LEVEL]->get_start_x(), levels[CURRENT_LEVEL]->get_start_y());
-
     while(game_running)
     {
         window.clear();
@@ -50,6 +49,15 @@ int main(int argc, char **argv)
 
         player.move_player(tiles);
         player.set_camera(cam);
+
+        if(start_frame > ANIMATION_RATE)
+        {   
+            player.set_next_animation();
+            start_frame = 0;
+        }
+        start_frame++;
+        
+        
 
         window.render_player(player,cam);
         window.display();
