@@ -24,22 +24,25 @@ void Player::handle_events(SDL_Event & e)
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_w: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
-            case SDLK_s: this->player_vel_y += this->PLAYER_MAX_VEL; break;
-            case SDLK_a: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
-            case SDLK_d: this->player_vel_x += this->PLAYER_MAX_VEL; break;
+            
+            case SDLK_w: this->player_vel_y -= this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_UP_BF; this->moving = true;break;
+            case SDLK_s: this->player_vel_y += this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_DOWN_BF; this->moving = true;break;
+            case SDLK_a: this->player_vel_x -= this->PLAYER_MAX_VEL;this->PLAYER_DIR = PLAYER_LEFT_BF; this->moving = true;break;
+            case SDLK_d: this->player_vel_x += this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_RIGHT_BF; this->moving = true; break;
         }
     }
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
+        
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_w: this->player_vel_y += this->PLAYER_MAX_VEL; break;
-            case SDLK_s: this->player_vel_y -= this->PLAYER_MAX_VEL; break;
-            case SDLK_a: this->player_vel_x += this->PLAYER_MAX_VEL; break;
-            case SDLK_d: this->player_vel_x -= this->PLAYER_MAX_VEL; break;
+            
+            case SDLK_w: this->player_vel_y += this->PLAYER_MAX_VEL;this->moving = false; break;
+            case SDLK_s: this->player_vel_y -= this->PLAYER_MAX_VEL; this->moving = false;break;
+            case SDLK_a: this->player_vel_x += this->PLAYER_MAX_VEL; this->moving = false;break;
+            case SDLK_d: this->player_vel_x -= this->PLAYER_MAX_VEL; this->moving = false;break;
         }
     }
 
@@ -128,5 +131,30 @@ void Player::set_pos(int x, int y)
 {
     this->hit_box.x = x;
     this->hit_box.y = y;
+}
+
+void Player::set_next_animation()
+{
+    if(this->moving)
+    {
+        
+        if(this->PLAYER_DIR <= 2)
+        {
+            this->PLAYER_DIR = (this->PLAYER_DIR + 1 > 2) ? this->PLAYER_DIR  - 2 : this->PLAYER_DIR + 1;
+
+        }else if (this->PLAYER_DIR <= 5)
+        {
+            this->PLAYER_DIR = (this->PLAYER_DIR + 1 > 5) ? this->PLAYER_DIR  - 2 : this->PLAYER_DIR + 1;
+
+        }else if (this->PLAYER_DIR <= 8 )
+        {
+            this->PLAYER_DIR = (this->PLAYER_DIR + 1 > 8) ? this->PLAYER_DIR  - 2 : this->PLAYER_DIR + 1;
+
+        } else if(this->PLAYER_DIR <= 11)
+        {
+            this->PLAYER_DIR = (this->PLAYER_DIR + 1 > 11) ? this->PLAYER_DIR  - 2 : this->PLAYER_DIR + 1;
+        }
+    }
+    
 }
 #endif

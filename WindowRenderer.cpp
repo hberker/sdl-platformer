@@ -66,7 +66,7 @@ void WindowRenderer::render_player(Player &player,  SDL_Rect &camera)
     int y = player.get_hit_box()->y - camera.y;
 
     SDL_Rect renderQuad = { x, y , player.get_hit_box()->w , player.get_hit_box()->h };
-    SDL_RenderCopy(this->renderer,player.get_texture(), NULL, &renderQuad);
+    SDL_RenderCopy(this->renderer,player.get_texture(),&(PLAYER_CLIP_LOCATIONS[player.PLAYER_DIR]), &renderQuad);
 
 }
 
