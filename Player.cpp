@@ -25,10 +25,10 @@ void Player::handle_events(SDL_Event & e)
         switch( e.key.keysym.sym )
         {
             
-            case SDLK_w: this->player_vel_y -= this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_UP_BF; this->moving = true;break;
-            case SDLK_s: this->player_vel_y += this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_DOWN_BF; this->moving = true;break;
-            case SDLK_a: this->player_vel_x -= this->PLAYER_MAX_VEL;this->PLAYER_DIR = PLAYER_LEFT_BF; this->moving = true;break;
-            case SDLK_d: this->player_vel_x += this->PLAYER_MAX_VEL; this->PLAYER_DIR = PLAYER_RIGHT_BF; this->moving = true; break;
+            case SDLK_w: this->player_vel_y -= this->PLAYER_MAX_VEL; player_vel_x = 0; this->PLAYER_DIR = PLAYER_UP_BF; this->moving = true;break;
+            case SDLK_s: this->player_vel_y += this->PLAYER_MAX_VEL; player_vel_x = 0;this->PLAYER_DIR = PLAYER_DOWN_BF; this->moving = true;break;
+            case SDLK_a: this->player_vel_x -= this->PLAYER_MAX_VEL; player_vel_y = 0;this->PLAYER_DIR = PLAYER_LEFT_BF; this->moving = true;break;
+            case SDLK_d: this->player_vel_x += this->PLAYER_MAX_VEL; player_vel_y = 0;this->PLAYER_DIR = PLAYER_RIGHT_BF; this->moving = true; break;
         }
     }
     //If a key was released
@@ -39,10 +39,10 @@ void Player::handle_events(SDL_Event & e)
         switch( e.key.keysym.sym )
         {
             
-            case SDLK_w: this->player_vel_y += this->PLAYER_MAX_VEL;this->moving = false; break;
-            case SDLK_s: this->player_vel_y -= this->PLAYER_MAX_VEL; this->moving = false;break;
-            case SDLK_a: this->player_vel_x += this->PLAYER_MAX_VEL; this->moving = false;break;
-            case SDLK_d: this->player_vel_x -= this->PLAYER_MAX_VEL; this->moving = false;break;
+            case SDLK_w: this->player_vel_y = 0/*this->player_vel_y += this->PLAYER_MAX_VEL*/;this->moving = false; break;
+            case SDLK_s: this->player_vel_y = 0/*this->player_vel_y -= this->PLAYER_MAX_VEL*/; this->moving = false;break;
+            case SDLK_a: this->player_vel_x = 0/*this->player_vel_x += this->PLAYER_MAX_VEL*/; this->moving = false;break;
+            case SDLK_d: this->player_vel_x = 0/*this->player_vel_x -= this->PLAYER_MAX_VEL*/; this->moving = false;break;
         }
     }
 
