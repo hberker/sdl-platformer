@@ -26,8 +26,8 @@ int main(int argc, char **argv)
     bool game_running = true;
 
     Level *levels[TOTAL_LEVELS] = {
-        new Level("assets/level1.map",LEVEL_WIDTH / 2,  LEVEL_HEIGHT - player.PLAYER_HEIGHT),
-        new Level("assets/test.map",0,0)
+        new Level("assets/maps/level1.map",LEVEL_WIDTH / 2,  LEVEL_HEIGHT - player.PLAYER_HEIGHT),
+        new Level("assets/maps/test.map",0,0)
     };
 
     //loads tiles with first level

@@ -5,6 +5,8 @@
         "list": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "*.ipp": "cpp",
+        "bitset": "cpp"
     }
 }
