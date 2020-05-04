@@ -64,13 +64,14 @@ class Player
         const int PLAYER_MAX_VEL = 7;
         int PLAYER_DIR = PLAYER_UP_BF;
 
-        bool moving = false;
-
+        
     private:
         SDL_Rect hit_box = {0,0,PLAYER_WIDTH, PLAYER_HEIGHT};
         SDL_Texture *player_texture = NULL;
         int player_vel_x = 0;
         int player_vel_y = 0;
+        bool moving = false;
+
 };
 
 #endif
