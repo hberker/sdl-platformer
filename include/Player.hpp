@@ -7,7 +7,43 @@
 
 //#include "Tile.hpp"
 #include "constant.hpp"
+enum PLAYER_SPRITE_ANIMATIONS
+{
+    PLAYER_DOWN_LF,
+    PLAYER_DOWN_BF,
+    PLAYER_DOWN_RF,
 
+    PLAYER_LEFT_LF,
+    PLAYER_LEFT_BF,
+    PLAYER_LEFT_RF,
+
+    PLAYER_UP_LF,
+    PLAYER_UP_BF,
+    PLAYER_UP_RF,
+
+    PLAYER_RIGHT_LF,
+    PLAYER_RIGHT_BF,
+    PLAYER_RIGHT_RF
+};
+constexpr SDL_Rect PLAYER_CLIP_LOCATIONS[TOTAL_PLAYER_SPRITES]
+{   
+    //Down
+    {2,0,       PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {22,0,      PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {42,0,     PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    //lEFT
+    {4,28,    PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {24 ,28,    PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {46,28,     PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    //UP
+    {2,56,    PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {24,56,   PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {46,56,   PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    // RIGHT
+    {0,84,    PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {22,84,     PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+    {42,84,      PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
+};
 class Player
 {
     public:
@@ -21,10 +57,14 @@ class Player
         bool at_gate(class Tile ** t);
         SDL_Texture * get_texture();
         SDL_Rect * get_hit_box();
+        void set_next_animation();
 
         const int PLAYER_WIDTH = 40;
         const int PLAYER_HEIGHT= 70;
         const int PLAYER_MAX_VEL = 7;
+        int PLAYER_DIR = PLAYER_UP_BF;
+
+        bool moving = false;
 
     private:
         SDL_Rect hit_box = {0,0,PLAYER_WIDTH, PLAYER_HEIGHT};
