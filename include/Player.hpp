@@ -2,11 +2,10 @@
 #define PLAYER_HPP
 
 #include <SDL2/SDL_events.h>
-#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL.h>
 
-//#include "Tile.hpp"
 #include "constant.hpp"
+
 enum PLAYER_SPRITE_ANIMATIONS
 {
     PLAYER_DOWN_LF,
@@ -25,7 +24,7 @@ enum PLAYER_SPRITE_ANIMATIONS
     PLAYER_RIGHT_BF,
     PLAYER_RIGHT_RF
 };
-constexpr SDL_Rect PLAYER_CLIP_LOCATIONS[TOTAL_PLAYER_SPRITES]
+constexpr class SDL_Rect PLAYER_CLIP_LOCATIONS[TOTAL_PLAYER_SPRITES]
 {   
     //Down
     {2,0,       PLAYER_SPRITE_WIDTH,PLAYER_SPRITE_HEIGHT},
@@ -47,29 +46,34 @@ constexpr SDL_Rect PLAYER_CLIP_LOCATIONS[TOTAL_PLAYER_SPRITES]
 class Player
 {
     public:
-        Player(SDL_Texture * );
+        Player(class SDL_Texture * );
         ~Player();
 
         void handle_events(SDL_Event &);
-        void set_camera(SDL_Rect &);
-        void move_player(class Tile ** t);
+        void set_camera(class SDL_Rect &, class Level *);
+        void move_player(class Tile ** t, class  Level *);
         void set_pos(int , int );
-        bool at_gate(class Tile ** t);
-        SDL_Texture * get_texture();
-        SDL_Rect * get_hit_box();
         void set_next_animation();
+        bool at_gate( class Level *);
+        int get_player_direction();
+
+        class SDL_Texture * get_texture();
+        class SDL_Rect * get_hit_box();
+        
+
 
         const int PLAYER_WIDTH = 40;
         const int PLAYER_HEIGHT= 70;
         const int PLAYER_MAX_VEL = 7;
-        int PLAYER_DIR = PLAYER_UP_BF;
+        
 
         
     private:
-        SDL_Rect hit_box = {0,0,PLAYER_WIDTH, PLAYER_HEIGHT};
+        class SDL_Rect hit_box = {0,0,PLAYER_WIDTH, PLAYER_HEIGHT};
         SDL_Texture *player_texture = NULL;
         int player_vel_x = 0;
         int player_vel_y = 0;
+        int PLAYER_DIR = PLAYER_UP_BF;
         bool moving = false;
 
 };

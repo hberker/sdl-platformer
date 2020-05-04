@@ -1,0 +1,1 @@
+LEVEL W (in tiles) LEVEL_HEIGHT(in tiles) 

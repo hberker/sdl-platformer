@@ -52,9 +52,8 @@ void WindowRenderer::render_tile(Tile * tile, SDL_Rect &camera, SDL_Texture * te
 {
     if(check_collision(tile->get_destination(),camera))
     {
-        int x = tile->get_destination().x- camera.x;
+        int x = tile->get_destination().x - camera.x;
         int y = tile->get_destination().y - camera.y;
-
         SDL_Rect renderQuad = { x, y, tile->get_destination().w, tile->get_destination().h};
         SDL_RenderCopy(this->renderer, texture, (tile->get_clip()), &(renderQuad));
     }
@@ -66,7 +65,7 @@ void WindowRenderer::render_player(Player &player,  SDL_Rect &camera)
     int y = player.get_hit_box()->y - camera.y;
 
     SDL_Rect renderQuad = { x, y , player.get_hit_box()->w , player.get_hit_box()->h };
-    SDL_RenderCopy(this->renderer,player.get_texture(),&(PLAYER_CLIP_LOCATIONS[player.PLAYER_DIR]), &renderQuad);
+    SDL_RenderCopy(this->renderer,player.get_texture(),&(PLAYER_CLIP_LOCATIONS[player.get_player_direction()]), &renderQuad);
 
 }
 

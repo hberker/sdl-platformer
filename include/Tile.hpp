@@ -1,12 +1,11 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 
-#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL.h>
 
 #include "constant.hpp"
 
-constexpr SDL_Rect CLIP_LOCATIONS[TOTAL_TILE_SPRITES]
+constexpr class SDL_Rect CLIP_LOCATIONS[TOTAL_TILE_SPRITES]
 {   
     //RGB
     {0,0,       TILE_SIZE,TILE_SIZE},
@@ -50,7 +49,7 @@ class Tile
 {
     public:
         Tile(int , int , SDL_Texture *);
-        Tile(int , int , const SDL_Rect &);
+        Tile(int , int , const class SDL_Rect &);
         ~Tile();
         SDL_Rect  & get_destination();
         const  SDL_Rect * get_clip();
@@ -59,7 +58,7 @@ class Tile
         int tile_type;
     private:
         SDL_Texture *texture = nullptr;
-        const SDL_Rect * clip = nullptr; 
+        const class SDL_Rect * clip = nullptr; 
         SDL_Rect destination;
         
         

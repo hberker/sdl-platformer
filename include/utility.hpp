@@ -3,16 +3,13 @@
 
 #include <fstream>
 #include <iostream>
-#include <SDL2/SDL_rect.h>
 
 #include "Tile.hpp"
 #include "constant.hpp"
 
-bool load_tiles(Tile ** tiles, char *);
+bool load_tiles(class Level *);
 
-bool check_collision(const SDL_Rect &A, const SDL_Rect &B);
+bool check_collision(const class SDL_Rect &, const class SDL_Rect &);
 
-void close( Tile **tiles);
-
-bool touches_wall(SDL_Rect &, Tile **tiles);
+bool touches_wall(class SDL_Rect &, class Level *);
 #endif 

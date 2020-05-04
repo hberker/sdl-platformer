@@ -10,28 +10,33 @@
 #include "include/Tile.hpp"
 #include "include/constant.hpp"
 #include "include/utility.hpp"
+#include "include/Level.hpp"
 
 
-bool load_tiles(Tile * tiles[], char *map_name)
+bool load_tiles(Level *level)
 {
     bool success = true;
     int x = 0;
     int y = 0;
+    int level_w = 0;
+    int level_h = 0;
 
     TILE_TYPE tile_type;
 
-    std::ifstream map(map_name);
+    std::ifstream map(level->get_map_name());
     if(map.fail()) 
     {
         std::cout << "Failed to load map\n";
         return false;
     }
-    for(int i = 0; i < TOTAL_TILES; i++)
+    map >> level_w >> level_h;
+    int tt = level_w * level_h ;
+    
+    for(int i = 0; i < tt; i++)
     {
         int type = -1;
         TILE_TYPE t;
         map >> type;  
-
         if(map.fail()) 
         {
             std::cout << "Error loading map: Unexpected end of file!\n";
@@ -42,10 +47,11 @@ bool load_tiles(Tile * tiles[], char *map_name)
             std::cout << "Invalid map num: " << type << std::endl;
             return false;
         }
-        tiles[i] = new Tile(x,y,CLIP_LOCATIONS[type]);
-        tiles[i]->tile_type = type;
+        if(level->tiles[i] != NULL) level->tiles[i] = NULL;
+        level->tiles[i] = new Tile(x,y,CLIP_LOCATIONS[type]);
+        level->tiles[i]->tile_type = type;
         x+= TILE_SIZE;
-        if( x >= LEVEL_WIDTH )
+        if( x >= level_w * TILE_SIZE)
         {
             x = 0;
             y += TILE_SIZE;
@@ -69,30 +75,16 @@ bool check_collision(const SDL_Rect &A, const SDL_Rect &B)
     return true;
 }
 
-void close( Tile* tiles[] )
-{
-    //Deallocate tiles
-	for( int i = 0; i < TOTAL_TILES; ++i )
-	{
-		 if( tiles[ i ] != NULL )
-		 {
-			delete tiles[ i ];
-			tiles[ i ] = NULL;
-		 }
-	}
-    
-}
-
-bool touches_wall(SDL_Rect & rect, Tile * tiles[])
+bool touches_wall(SDL_Rect & rect, Level * level)
 {
     //Go through the tiles
-    for( int i = 0; i < TOTAL_TILES; ++i )
+    for( int i = 0; i < level->get_total_tiles(); ++i )
     {
         //If the tile is a wall type tile
-        if( ( tiles[ i ]->tile_type >= PATH_MIDDLE ) && ( tiles[ i ]->tile_type <= PATH_TOPLEFT ) )
+        if( ( level->tiles[ i ]->tile_type >= PATH_MIDDLE ) && ( level->tiles[ i ]->tile_type <= PATH_TOPLEFT ) )
         {
             //If the collision box touches the wall tile
-            if( check_collision( rect, tiles[ i ]->get_destination() ) )
+            if( check_collision( rect, level->tiles[ i ]->get_destination() ) )
             {
                 return true;
             }
