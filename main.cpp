@@ -14,6 +14,10 @@
 
 int main(int argc, char **argv)
 {
+    unsigned int start_frame = 0;
+    unsigned int CURRENT_LEVEL = 0;
+    bool game_running = true;
+
     WindowRenderer window(GAME_NAME,WINDOW_WIDTH,WINDOW_HEIGHT);
     SDL_Texture * tile_textures = window.load_texture(TILE_TEXTURE_PATH);
     SDL_Texture * player_texture = window.load_texture(PLAYER_TEXTURE_PATH);
@@ -23,14 +27,10 @@ int main(int argc, char **argv)
 
     Level *levels[TOTAL_LEVELS] = 
     {
-        new Level("assets/maps/level1.map",640,850 - PLAYER_SPRITE_HEIGHT),
+        new Level("assets/maps/level1.map",640/80  * TILE_SIZE ,850/80 * TILE_SIZE - PLAYER_SPRITE_HEIGHT),
         new Level("assets/maps/test.map",4,4),
         new Level("assets/maps/open_chamber.map", 100,100)
     };
-
-    unsigned int start_frame = 0;
-    unsigned int CURRENT_LEVEL = 0;
-    bool game_running = true;
 
     //loads tiles with first level
     load_tiles(levels[0]);

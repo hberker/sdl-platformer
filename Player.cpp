@@ -12,10 +12,7 @@ Player::Player(SDL_Texture * text)
     this->player_texture = text;
 }
 
-Player::~Player()
-{
-
-}
+Player::~Player() {}
 
 void Player::handle_events(SDL_Event & e)
 {
@@ -25,7 +22,6 @@ void Player::handle_events(SDL_Event & e)
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            
             case SDLK_w: this->player_vel_y = -this->PLAYER_MAX_VEL; player_vel_x = 0; this->PLAYER_DIR = PLAYER_UP_BF; this->moving = true;break;
             case SDLK_s: this->player_vel_y = this->PLAYER_MAX_VEL; player_vel_x = 0;this->PLAYER_DIR = PLAYER_DOWN_BF; this->moving = true;break;
             case SDLK_a: this->player_vel_x = -this->PLAYER_MAX_VEL; player_vel_y = 0;this->PLAYER_DIR = PLAYER_LEFT_BF; this->moving = true;break;
@@ -40,10 +36,10 @@ void Player::handle_events(SDL_Event & e)
         switch( e.key.keysym.sym )
         {
             
-            case SDLK_w: this->player_vel_y = 0/*this->player_vel_y += this->PLAYER_MAX_VEL*/; break;
-            case SDLK_s: this->player_vel_y = 0/*this->player_vel_y -= this->PLAYER_MAX_VEL*/;break;
-            case SDLK_a: this->player_vel_x = 0/*this->player_vel_x += this->PLAYER_MAX_VEL*/; break;
-            case SDLK_d: this->player_vel_x = 0/*this->player_vel_x -= this->PLAYER_MAX_VEL*/;break;
+            case SDLK_w: this->player_vel_y = 0;break;
+            case SDLK_s: this->player_vel_y = 0;break;
+            case SDLK_a: this->player_vel_x = 0;break;
+            case SDLK_d: this->player_vel_x = 0;break;
         }
     }
 
@@ -54,7 +50,7 @@ void Player::move_player(Level * level)
 {
     // Allows players head to overlap with wall ahead of it;
     SDL_Rect adjusted_hitbox;
-    int Y_offset = 30;
+    int Y_offset = 40;
 
     this->hit_box.x += this->player_vel_x;
     adjusted_hitbox = hit_box;   
@@ -80,7 +76,7 @@ bool Player::at_gate(Level * level)
     for( int i = 0; i < level->get_total_tiles(); ++i )
     {
         //If the tile is a wall type tile
-        if( ( level->tiles[ i ]->tile_type == RED_GATE_TILE ) )
+        if( level->tiles[ i ]->tile_type == RED_GATE_TILE )
         {
             //If the collision box touches the wall tile
             if( check_collision( this->hit_box, level->tiles[ i ]->get_destination() ) )

@@ -7,10 +7,11 @@
 
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
-Level::Level(char * mn, int x, int y)
+Level::Level(char mn[], int x, int y)
 {
-    this->map_name = mn;
+    this->map_name = mn ;
     this->start_x = x;
     this->start_y = y;
 

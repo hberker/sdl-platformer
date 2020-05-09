@@ -12,7 +12,7 @@
 #include <iostream>
 
 
-WindowRenderer::WindowRenderer(char *window_name, int width, int height)
+WindowRenderer::WindowRenderer(const char window_name[], int width, int height)
 {
     this->window = SDL_CreateWindow(window_name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,SDL_WINDOW_SHOWN);
     if(this->window == NULL) 

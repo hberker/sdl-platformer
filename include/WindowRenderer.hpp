@@ -11,7 +11,7 @@
 class WindowRenderer
 {
     public:
-        WindowRenderer(char *, int, int);
+        WindowRenderer(const char [], int, int);
         ~WindowRenderer();
 
         SDL_Texture * load_texture(const char *);
