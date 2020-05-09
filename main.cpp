@@ -27,9 +27,9 @@ int main(int argc, char **argv)
 
     Level *levels[TOTAL_LEVELS] = 
     {
-        new Level("assets/maps/level1.map",640/80  * TILE_SIZE ,850/80 * TILE_SIZE - PLAYER_SPRITE_HEIGHT),
-        new Level("assets/maps/test.map",4,4),
-        new Level("assets/maps/open_chamber.map", 100,100)
+        new Level((char *) "assets/maps/level1.map",640/80  * TILE_SIZE ,850/80 * TILE_SIZE - PLAYER_SPRITE_HEIGHT),
+        new Level((char *) "assets/maps/test.map",4,4),
+        new Level((char *) "assets/maps/open_chamber.map", 100,100)
     };
 
     //loads tiles with first level
