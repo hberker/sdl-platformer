@@ -50,7 +50,7 @@ void Player::handle_events(SDL_Event & e)
 
 }
 
-void Player::move_player(Tile * tiles[],Level * level)
+void Player::move_player(Level * level)
 {
     // Allows players head to overlap with wall ahead of it;
     SDL_Rect adjusted_hitbox;

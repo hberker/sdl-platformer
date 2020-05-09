@@ -38,37 +38,44 @@ int main(int argc, char **argv)
     player.set_pos(levels[CURRENT_LEVEL]->get_start_x(), levels[CURRENT_LEVEL]->get_start_y());
     while(game_running)
     {
+        //Clear window of last frame
         window.clear();
+
+        //Poll events for quites, moves, ability
         while(SDL_PollEvent(&event))
         {
-            if(event.type == SDL_QUIT) game_running = false;
+            game_running = event.type != SDL_QUIT;
             player.handle_events(event);
         }
 
         //renderes tiles 
         for(int i = 0;  i < levels[CURRENT_LEVEL]->get_total_tiles(); i++) window.render_tile((levels[CURRENT_LEVEL]->tiles[i]), cam, tile_textures);
         
-        player.move_player(levels[CURRENT_LEVEL]->tiles,levels[CURRENT_LEVEL]);
+        //Upate player position
+        player.move_player(levels[CURRENT_LEVEL]);
+        //Update camera position
         player.set_camera(cam, levels[CURRENT_LEVEL]);
 
+        //Set next frame TODO change to time based instead of frame based 
         if(start_frame > ANIMATION_RATE)
         {   
             player.set_next_animation();
             start_frame = 0;
         }
         start_frame++;
-        
-    
-        window.render_player(player,cam);
-        window.display();
 
         //Checks to see if player can progress to next level
-        if(CURRENT_LEVEL+1 < TOTAL_LEVELS && player.at_gate(levels[CURRENT_LEVEL]) )
+        if(CURRENT_LEVEL + 1 < TOTAL_LEVELS && player.at_gate(levels[CURRENT_LEVEL]))
         {
             CURRENT_LEVEL++;
             load_tiles(levels[CURRENT_LEVEL]);
             player.set_pos(levels[CURRENT_LEVEL]->get_start_x(), levels[CURRENT_LEVEL]->get_start_y());
         }
+
+        //Render and display player
+        window.render_player(player,cam);
+        window.display();
+        
     }
 }
 #endif

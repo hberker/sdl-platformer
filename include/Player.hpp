@@ -51,7 +51,7 @@ class Player
 
         void handle_events(SDL_Event &);
         void set_camera(class SDL_Rect &, class Level *);
-        void move_player(class Tile ** t, class  Level *);
+        void move_player(class  Level *);
         void set_pos(int , int );
         void set_next_animation();
         bool at_gate( class Level *);
