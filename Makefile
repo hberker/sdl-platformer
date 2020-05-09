@@ -1,12 +1,12 @@
 CC = g++
-FLAGS = -I /usr/include/SDL2 
+FLAGS =  -std=c++14 -lSDL2 -lSDL2_image
 TARGET = snake
 EXEC = *.cpp
 
 default: main.o
 
 main.o: $(EXEC)
-	$(CC) $(FLAGS) $(EXEC) -o $(TARGET) -lSDL2  -lSDL2_image
+	$(CC) $(FLAGS) $(EXEC) -o $(TARGET) 
 
 run: main.o
 	./$(TARGET)
