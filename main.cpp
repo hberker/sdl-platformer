@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
     unsigned int start_frame = 0;
     unsigned int CURRENT_LEVEL = 0;
-    bool game_running = true;
+    bool game_running = init_sdl();;
 
     WindowRenderer window(GAME_NAME,WINDOW_WIDTH,WINDOW_HEIGHT);
     SDL_Texture * tile_textures = window.load_texture(TILE_TEXTURE_PATH);
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
         //Render and display player
         window.render_player(player,cam);
         window.display();
-        
     }
+    close();
 }
 #endif
