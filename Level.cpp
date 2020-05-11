@@ -16,10 +16,9 @@ Level::Level(char mn[], int x, int y)
     this->start_y = y;
 
     std::ifstream map(map_name);
-    if(map.fail()) 
-    {
-        std::cout << "Failed to load map\n";
-    }
+    
+    if(map.fail()) std::cout << "Failed to load map\n";  
+
     map >> this->level_width >> this->level_height;
     this->total_tiles = this->level_width * this->level_height ;
     this->level_height *= TILE_SIZE;
