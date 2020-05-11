@@ -94,4 +94,22 @@ bool touches_wall(SDL_Rect & rect, Level * level)
     //If no wall tiles were touched
     return false;
 }
+
+bool init_sdl()
+{
+    bool success = true;
+    //Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) != 0)
+    {
+        std::cout <<  "SDL could not initialize! SDL_Error: " <<  SDL_GetError() << std::endl;
+        success = false;
+    }
+    return success;
+}
+
+bool close()
+{
+    SDL_Quit();
+    return true;
+}
 #endif
