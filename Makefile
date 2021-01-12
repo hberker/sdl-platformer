@@ -1,12 +1,12 @@
 CC = g++
-FLAGS =  -std=c++14 -lSDL2 -lSDL2_image
+FLAGS =  -std=c++14
 TARGET = topdown.out
 EXEC = *.cpp
 
 default: main.o
 
 main.o: $(EXEC)
-	$(CC) $(FLAGS) $(EXEC) -o $(TARGET) 
+	$(CC) $(FLAGS) $(EXEC) -o $(TARGET) -lSDL2 -lSDL2_image
 
 run: main.o
 	./$(TARGET)
