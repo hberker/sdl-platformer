@@ -83,6 +83,7 @@ bool Player::at_gate(Level * level)
             {
                 return true;
             }
+            return false;
         }
     }
     return false;
